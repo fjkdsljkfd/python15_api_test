@@ -3,6 +3,9 @@
 # @Author :xuqiao  
 # @Email :1462942304@qq.com
 # @File :case_reports.py
+import sys
+sys.path.append("./")
+print(sys.path)
 import unittest
 from API_7.conmon import cantins
 import HTMLTestRunner

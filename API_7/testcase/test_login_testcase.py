@@ -19,9 +19,10 @@ class Login(unittest.TestCase):
         logger.info("执行用例前的前置工作")
     @data(*ExcelTest(cantins.data_path,"login").read_excel())
     def test_logintest(self,case):
+        logger.info("----------------------------------------------------------------")
         logger.info("执行用例开始：{}".format(case.title))
         case.data = getdata(case.data)
-        logger.debug("请求的数据是：{}".format(case.data))
+        logger.info("请求的数据是：{}".format(case.data))
         res = self.http_request.http_res(case.method,case.url,case.data).text
         try:
             self.assertEqual(case.exp,res)
@@ -32,6 +33,7 @@ class Login(unittest.TestCase):
         else:
             ExcelTest(cantins.data_path,"login").write_excel(case.case_id+1,res,"PASS")
         logger.info("测试结束：{}".format(case.title))
+        logger.info("----------------------------------------------------------------")
     @classmethod
     def tearDownClass(cls):
         cls.http_request.session_close()
